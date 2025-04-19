@@ -15,8 +15,10 @@
             </div>
             <div class="clock-list">
                 <div class="clock-input">
-                    <input type="text" id="input-box" placeholder="Escribe una ubicación">
+                    <input type="text" id="input-box" list="buscador" placeholder="Escribe una ubicación">
                     <button onclick="addCountry()">Agregar</button>
+                    <datalist id="buscador">
+                    </datalist>
                 </div>
                 <ul id="list-container"></ul>
             </div>
