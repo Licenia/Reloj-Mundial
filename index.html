@@ -1,31 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/reloj.jpg" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/reloj.jpg" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Reloj Mundial</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="clock-section">
-        <aside class="clock-content">
-            <div class="clock-image">
-                <img src="./img/reloj.jpg" alt="Reloj Mundial">
-            </div>
-            <div class="clock-list">
-                <div class="clock-input">
-                    <input type="text" id="input-box" list="buscador" placeholder="Escribe una ubicación">
-                    <button onclick="addCountry()">Agregar</button>
-                    <datalist id="buscador">
-                    </datalist>
-                </div>
-                <ul id="list-container"></ul>
-            </div>
-
-        </aside>
+      <aside class="clock-content">
+        <div class="clock-image">
+          <img src="./img/reloj.jpg" alt="Reloj Mundial" />
+        </div>
+        <div class="clock-list">
+          <div class="clock-input">
+            <input
+              type="text"
+              id="input-box"
+              list="buscador"
+              placeholder="Escribe una ubicación"
+            />
+            <button onclick="manejarBusqueda()">Agregar</button>
+            <datalist id="buscador"> </datalist>
+          </div>
+          <ul id="list-container">
+            <!-- <li>
+              <div class="container-img">
+                <img src="./img/sol.jpg" alt="" srcset="" />
+              </div>
+              <div class="container-hour">
+                <h2>01:20 PM</h2>
+              </div>
+              <div class="container-date">
+                <h2>Paris</h2>
+                <h2>20/04/2025</h2>
+              </div>
+            </li> -->
+            
+          </ul>
+        </div>
+      </aside>
     </section>
-    
-</body>
-<script src="script.js"></script>
+  </body>
+  <script src="script.js"></script>
 </html>
