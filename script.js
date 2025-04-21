@@ -8,10 +8,15 @@ const message = document.querySelector(".clock-input");
 let horaFormateada;
 let fechaFormateada;
 let ciudad;
+let ciudadesAgregadas= [];
 
 function manejarBusqueda() {
-  addCountry();
-  obtenerFechayHora();
+  const nuevaCiudad = addCountry();
+  if(nuevaCiudad && !ciudadesAgregadas.includes(nuevaCiudad)){
+    ciudadesAgregadas.push(nuevaCiudad);
+    obtenerFechayHora(nuevaCiudad);
+
+  }
 }
 
 
@@ -28,7 +33,14 @@ function addCountry() {
   return ciudad;
 }
 
-async function obtenerFechayHora() {
+setInterval(() =>{
+  ciudadesAgregadas.forEach((ciudad) =>{
+    obtenerFechayHora(ciudad);
+  })
+}, 60000);
+
+
+async function obtenerFechayHora(ciudad) {
   const url = `https://timeapi.io/api/TimeZone/zone?timeZone=${ciudad}`;
 
   await fetch(url)
@@ -94,7 +106,16 @@ function shearch() {
 
 
 function mostrarResultados(horaFormateada,  ciudad, fechaFormateada){
+  const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`);
+
+  if(ciudadExistente){
+    ciudadExistente.querySelector(".hora").textContent = horaFormateada;
+    ciudadExistente.querySelector(".fecha").textContent = fechaFormateada;
+    return;
+  }
+
   const li = document.createElement('li');
+  li.setAttribute('data-ciudad', ciudad);
 
   const hijo1= document.createElement('div');
   hijo1.setAttribute('class', 'container-img');
@@ -161,3 +182,4 @@ function obtenerHoraEn24(horaFormateada) {
 
   return horas; 
 }
+
