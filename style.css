@@ -1,116 +1,123 @@
 *,
 ::before,
-::after{
-    box-sizing: border-box;
+::after {
+  box-sizing: border-box;
 }
 
-body, html{
-    margin: 0;
-    width: 100%;
-    height: 100%;
+body,
+html {
+  margin: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.clock-section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
+.clock-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
-.clock-content{
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
+.clock-content {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
-.clock-image{
-    width: 27rem;
+.clock-image {
+  width: 30rem;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  object-fit: cover;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.clock-list {
+  width: 50%;
+}
+
+.clock-input {
+  width: 100%;
+  display: flex;
+}
+
+p {
+  color: red;
 }
 
 
-.clock-image img{
-    width: 100%;
+button {
+  margin-left: 0.5rem;
+  width: 30%;
+  padding: 0.4rem;
+  font-family: Quicksand;
+  font-size: larger;
+  background-color: #000;
+  color: #fff;
+  border-radius: 0.4rem;
 }
 
-.clock-list{
-    width: 50%;
+button:hover {
+  cursor: pointer;
 }
 
-.clock-input{
- width: 100%;
- display: flex;
+li {
+  width: 21rem;
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  border: 1px solid #000;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
 }
 
-p{
-    color: red;
+.container-img {
+  width: 5rem;
 }
 
-
-input[type = "text"]{
-    padding: .4rem;
-    border-radius: .4rem;
-    font-family: Quicksand;   
-     font-size: larger;
-     width: 50%;
-     border: 2px solid #000;
-    
-
+.container-img img {
+  width: 4rem;
+  margin-left: 0.5rem;
 }
 
-button{
-    margin-left: .5rem;
-    width: 30%;
-    padding: .4rem;
-    font-family: Quicksand;
+h2 {
+  font-family: Quicksand;
+  font-weight: 400;
+}
+
+.container-hour h2 {
+  font-weight: 500;
+}
+
+.container-date h2 {
+  margin: 0;
+  font-size: large;
+}
+
+select{
+    padding: 1rem;
+}
+
+option{
     font-size: larger;
-    background-color: #000;
-    color: #fff;
-    border-radius: .4rem;
-    
-
-}
-
-button:hover{
-    cursor: pointer;
-}
-
-li{
-    width: 20rem;
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-    border: 1px solid #000;
-    align-items: center;
-    margin-bottom: .6rem;
-    padding: .5rem;
-    border-radius: .4rem;
-}
-
-
-
-.container-img{
-    width: 5rem;
-}
-
-.container-img img{
-    width: 4rem;
-    margin-left: .5rem;
-
-}
-
-h2{
     font-family: Quicksand;
-    font-weight: 400;
-}
-
-.container-hour h2{
-    font-weight: 500;
-}
-
-.container-date h2{
-    margin: 0;
-    font-size: large;
+  font-weight: 400;
 }

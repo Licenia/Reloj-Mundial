@@ -17,21 +17,18 @@
     <section class="clock-section">
       <aside class="clock-content">
         <div class="clock-image">
-          <img src="./img/shinigami.jpeg" alt="Reloj Mundial" />
+          <img src="./img/shinigami.jpeg" alt="Reloj Mundial" class="slide active" />
+          <img src="./img/kidd.jpeg"  class="slide">
         </div>
         <div class="clock-list">
-          <div class="clock-input">
-            <input
-              type="text"
-              id="input-box"
-              list="buscador"
-              placeholder="Escribe una ubicación"
-            />
+          <select id="zona-select">
+            <option value="">Seleccione una zona horaria</option>
+          </select>
             <button onclick="manejarBusqueda()">Agregar</button>
-            <datalist id="buscador"> </datalist>
+            <div class="message"></div>
+            <ul id="list-container">
+            </ul>
           </div>
-          <ul id="list-container">
-          </ul>
         </div>
       </aside>
     </section>
