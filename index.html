@@ -15,7 +15,6 @@
   </head>
   <body>
     <section class="clock-section">
-      <aside class="clock-content">
         <div class="clock-image">
           <img src="./img/shinigami.jpeg" alt="Reloj Mundial" class="slide active" />
           <img src="./img/kidd.jpeg"  class="slide">
@@ -25,13 +24,21 @@
             <option value="">Seleccione una zona horaria</option>
           </select>
             <button onclick="manejarBusqueda()">Agregar</button>
-            <div class="message"></div>
-            <ul id="list-container">
-            </ul>
           </div>
-        </div>
-      </aside>
+            <div class="message"></div>
+            <div id="list-container">
+            </div>
     </section>
+    <template id="template-card">
+      <section class="container-result" data-ciudad>
+        <img src="" class="container-img">
+        <time datetime=""></time>
+        <div>
+          <span class="date"></span>
+          <span class="city"></span>
+        </div>
+      </section>
+    </template>
   </body>
   <script src="script.js"></script>
 </html>

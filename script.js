@@ -1,9 +1,10 @@
 
 
-const cotenedor = document.getElementById("container");
-const zonaSelect = document.getElementById("zona-select");
-const listContainer = document.getElementById("list-container");
-const message = document.querySelector(".clock-input");
+const cotenedor = document.getElementById("container"),
+zonaSelect = document.getElementById("zona-select"),
+$listContainer = document.getElementById("list-container"),
+message = document.querySelector(".clock-input"),
+d = document;
 
 let horaFormateada;
 let fechaFormateada;
@@ -85,60 +86,32 @@ function addCountry() {
     .catch((err) => console.error("Error al obtnener zonas horarias", err));
   }
   
-  
+
   
   function mostrarResultados(horaFormateada,  ciudad, fechaFormateada){
-    const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`);
+    const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`),
+    $template = d.getElementById("template-card").content;
+    $fragment = d.createDocumentFragment()
     
     if(ciudadExistente){
       ciudadExistente.querySelector(".hora").textContent = horaFormateada;
       ciudadExistente.querySelector(".fecha").textContent = fechaFormateada;
       return;
     }
-    
-    const li = document.createElement('li');
-    li.setAttribute('data-ciudad', ciudad);
-    
-    const hijo1= document.createElement('div');
-    hijo1.setAttribute('class', 'container-img');
-    
-    const hijo2 = document.createElement('div');
-    hijo2.setAttribute('class', 'container-hour');
-    
-    const hijo3 = document.createElement('div');
-    hijo3.setAttribute('class', 'container-date');
-    
-    let icono = document.createElement('img');
-    
-    diaNoche(horaFormateada, icono);
-    
-    let nieto1 = document.createElement('h2');
-    nieto1.setAttribute('class', 'hora');
-    
-    let nieto2 = document .createElement('h2');
-    nieto2.setAttribute('class', 'nombreCiudad')
-    
-    let nieto3 = document.createElement('h2');
-    nieto3.setAttribute('class', 'fecha')
-    
-    // Asignar contenido
-    nieto1.textContent = horaFormateada;
-    nieto2.textContent = ciudad;
-    nieto3.textContent = fechaFormateada;
-    
-    // Armar la estructura
-    hijo1.appendChild(icono);
-    hijo2.appendChild(nieto1);
-    hijo3.appendChild(nieto2);
-    hijo3.appendChild(nieto3);
-    
-    li.appendChild(hijo1);
-    li.appendChild(hijo2);
-    li.appendChild(hijo3);
-    
-    listContainer.appendChild(li);
-    
-    
+
+    let $clone = d.importNode($template, true)
+    $img = $clone.querySelector(".container-img")
+
+    $clone.querySelector("[data-ciudad]").setAttribute("data-ciudad",ciudad)
+    $clone.querySelector("time").textContent = horaFormateada
+    $clone.querySelector(".date").textContent = fechaFormateada
+    $clone.querySelector(".city").textContent = ciudad
+
+    diaNoche(horaFormateada, $img)
+
+    $fragment.appendChild($clone)    
+    $listContainer.appendChild($fragment)
+
   }
   
   function diaNoche (horaFormateada, icono){
