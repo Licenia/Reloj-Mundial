@@ -1,15 +1,15 @@
 
 
-const cotenedor = document.getElementById("container"),
-zonaSelect = document.getElementById("zona-select"),
-$listContainer = document.getElementById("list-container"),
-message = document.querySelector(".clock-input"),
-d = document;
+const d = document,
+cotenedor = d.getElementById("container"),
+zonaSelect = d.getElementById("zona-select"),
+$listContainer = d.querySelector("#list-container li"),
+message = d.querySelector(".clock-input")
 
-let horaFormateada;
-let fechaFormateada;
-let ciudad;
-let ciudadesAgregadas= [];
+let horaFormateada,
+fechaFormateada,
+ciudad,
+ciudadesAgregadas= [];
 
 
 function manejarBusqueda() {
@@ -100,7 +100,7 @@ function addCountry() {
     }
 
     let $clone = d.importNode($template, true)
-    $img = $clone.querySelector(".container-img")
+    $img = $clone.querySelector(".timezone-icon")
 
     $clone.querySelector("[data-ciudad]").setAttribute("data-ciudad",ciudad)
     $clone.querySelector("time").textContent = horaFormateada

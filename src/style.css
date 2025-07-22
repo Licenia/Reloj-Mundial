@@ -49,7 +49,11 @@ html {
 }
 
 .clock-list {
-  width: 50%;
+  width: 100%;
+}
+
+.clock-list ul {
+  padding: 0;
 }
 
 .clock-input {
@@ -61,10 +65,8 @@ p {
   color: red;
 }
 
-
 button {
   margin-left: 0.5rem;
-  width: 30%;
   padding: 0.4rem;
   font-family: Quicksand;
   font-size: larger;
@@ -78,7 +80,7 @@ button:hover {
 }
 
 li {
-  width: 21rem;
+  width: 100%;
   display: flex;
   gap: 1rem;
   list-style: none;
@@ -112,12 +114,32 @@ h2 {
   font-size: large;
 }
 
-select{
-    padding: 1rem;
+select {
+  padding: 1rem;
 }
 
-option{
-    font-size: larger;
-    font-family: Quicksand;
+option {
+  font-size: larger;
+  font-family: Quicksand;
   font-weight: 400;
+}
+
+.container-result{
+  display: flex;
+  justify-content: space-around;
+}
+
+.timezone-icon {
+  max-width: 20%;
+  height: auto;
+}
+
+.hour{
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+
+.city{
+  display: block;
+  font-size: clamp(1rem, 4vw, 2rem);
+
 }

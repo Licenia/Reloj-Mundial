@@ -10,35 +10,51 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/src/style.css" />
     <title>Reloj Mundial</title>
   </head>
   <body>
     <section class="clock-section">
-        <div class="clock-image">
+        <figure class="clock-image">
           <img src="./img/shinigami.jpeg" alt="Reloj Mundial" class="slide active" />
           <img src="./img/kidd.jpeg"  class="slide">
-        </div>
-        <div class="clock-list">
-          <select id="zona-select">
-            <option value="">Seleccione una zona horaria</option>
-          </select>
+        </figure>
+
+        <div>
+          <div class="clock-list">
+            <select id="zona-select">
+              <option value="">Seleccione una zona horaria</option>
+            </select>
             <button onclick="manejarBusqueda()">Agregar</button>
-          </div>
             <div class="message"></div>
-            <div id="list-container">
+
+            <ul id="list-container">
+              <li>
+                <article class="container-result" data-ciudad>
+         <img src="/img/luna.jpg" class="timezone-icon">
+         <div>
+           <span class="city">Quito</span>
+           <span class="hour">08:05 am</span>
+         </div>
+         <div>
+           <span class="date">22/07/2025</span>
+         </div>
+        </article>
+              </li>
+            </ul>
             </div>
     </section>
+
     <template id="template-card">
-      <section class="container-result" data-ciudad>
+      <article class="container-result" data-ciudad>
         <img src="" class="container-img">
         <time datetime=""></time>
         <div>
           <span class="date"></span>
           <span class="city"></span>
         </div>
-      </section>
+      </article>
     </template>
   </body>
-  <script src="script.js"></script>
+  <script src="/src/script.js"></script>
 </html>
