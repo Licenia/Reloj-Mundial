@@ -22,38 +22,27 @@
 
         <div>
           <div class="clock-list">
-            <select id="zona-select">
+            <select id="zona-select" >
               <option value="">Seleccione una zona horaria</option>
             </select>
             <button onclick="manejarBusqueda()">Agregar</button>
             <div class="message"></div>
-
             <ul id="list-container">
-              <li>
-                <article class="container-result" data-ciudad>
-         <img src="/img/luna.jpg" class="timezone-icon">
-         <div>
-           <span class="city">Quito</span>
-           <span class="hour">08:05 am</span>
-         </div>
-         <div>
-           <span class="date">22/07/2025</span>
-         </div>
-        </article>
-              </li>
             </ul>
             </div>
     </section>
 
     <template id="template-card">
-      <article class="container-result" data-ciudad>
-        <img src="" class="container-img">
-        <time datetime=""></time>
-        <div>
-          <span class="date"></span>
-          <span class="city"></span>
-        </div>
-      </article>
+      <li class="container-result" data-ciudad="">
+          <img src="" class="timezone-icon">
+          <div class="info">
+            <span class="city"></span>
+            <span class="hour"></span>
+          </div>
+          <div>
+            <span class="date"><b></b></span>
+          </div>
+      </li>
     </template>
   </body>
   <script src="/src/script.js"></script>
