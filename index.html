@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/reloj.jpg" type="image/x-icon" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,17 +14,12 @@
   </head>
   <body>
     <section class="clock-section">
-        <figure class="clock-image">
-          <img src="./img/shinigami.jpeg" alt="Reloj Mundial" class="slide active" />
-          <img src="./img/kidd.jpeg"  class="slide">
-        </figure>
-
         <div>
           <div class="clock-list">
             <select id="zona-select" >
               <option value="">Seleccione una zona horaria</option>
             </select>
-            <button onclick="manejarBusqueda()">Agregar</button>
+            <button id="agregarZonaHoraria">Agregar</button>
             <div class="message"></div>
             <ul id="list-container">
             </ul>
@@ -34,7 +28,7 @@
 
     <template id="template-card">
       <li class="container-result" data-ciudad="">
-          <img src="" class="timezone-icon">
+          <div class="timezone-icon"></div>
           <div class="info">
             <span class="city"></span>
             <span class="hour"></span>
@@ -45,5 +39,5 @@
       </li>
     </template>
   </body>
-  <script src="/src/script.js"></script>
+  <script  type="module" src="/src/main.js"></script>
 </html>
