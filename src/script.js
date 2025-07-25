@@ -92,8 +92,13 @@ function search() {
 
 function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`),
-    $template = d.getElementById("template-card").content;
-  $fragment = d.createDocumentFragment();
+  $template = d.getElementById("template-card").content;
+  $fragment = d.createDocumentFragment(),
+  $imgOpcion = d.createElement("img");
+
+  $imgOpcion.src = "/img/tres-puntos.png",
+  $imgOpcion.alt = "Opciones";
+  $imgOpcion.classList.add("icono-opciones");
 
   if (ciudadExistente) {
     ciudadExistente.querySelector(".hora").textContent = horaFormateada;
@@ -108,6 +113,9 @@ function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   $clone.querySelector(".hour").textContent = horaFormateada;
   $clone.querySelector(".date").textContent = fechaFormateada;
   $clone.querySelector(".city").textContent = ciudad;
+
+  const $contenedorFecha = $clone.querySelector(".date");
+  $contenedorFecha.insertAdjacentElement("afterend", $imgOpcion);
 
   diaNoche(horaFormateada, $img);
 
