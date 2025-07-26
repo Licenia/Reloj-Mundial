@@ -1,7 +1,6 @@
 const d = document,
   cotenedor = d.getElementById("container"),
   $zonaSelect = d.getElementById("zona-select"),
-  $listContainer = d.querySelector("#list-container"),
   message = d.querySelector(".clock-input");
 
 let horaFormateada,
@@ -9,7 +8,7 @@ let horaFormateada,
   ciudad,
   ciudadesAgregadas = [];
 
-function manejarBusqueda() {
+export function manejarBusqueda() {
   const nuevaCiudad = addCountry();
   if (nuevaCiudad && !ciudadesAgregadas.includes(nuevaCiudad)) {
     ciudadesAgregadas.push(nuevaCiudad);
@@ -62,7 +61,7 @@ async function obtenerFechayHora(ciudad) {
     .catch((err) => console.error(err));
 }
 
-function search() {
+export function search() {
   const url = "https://timeapi.io/api/timezone/availabletimezones",
     zonasGuardadas = JSON.parse(localStorage.getItem("datos")),
     zonasHorarias = (zonas) => {
@@ -92,12 +91,12 @@ function search() {
 
 function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`),
-  $template = d.getElementById("template-card").content;
+  $listContainer = d.querySelector("#list-container"),  
+  $template = d.getElementById("template-card").content,
   $fragment = d.createDocumentFragment(),
   $imgOpcion = d.createElement("img");
 
-  $imgOpcion.src = "/img/tres-puntos.png",
-  $imgOpcion.alt = "Opciones";
+  ($imgOpcion.src = "/img/tres-puntos.png"), ($imgOpcion.alt = "Opciones");
   $imgOpcion.classList.add("icono-opciones");
 
   if (ciudadExistente) {
@@ -107,30 +106,22 @@ function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   }
 
   let $clone = d.importNode($template, true);
-  $img = $clone.querySelector(".timezone-icon");
 
   $clone.querySelector("[data-ciudad]").setAttribute("data-ciudad", ciudad);
   $clone.querySelector(".hour").textContent = horaFormateada;
   $clone.querySelector(".date").textContent = fechaFormateada;
   $clone.querySelector(".city").textContent = ciudad;
 
-  const $contenedorFecha = $clone.querySelector(".date");
-  $contenedorFecha.insertAdjacentElement("afterend", $imgOpcion);
+  const $icon = $clone.querySelector(".timezone-icon"),
+  hora = obtenerHoraEn24(horaFormateada);
 
-  diaNoche(horaFormateada, $img);
+  $icon.textContent = hora >= 6 && hora <= 18 ? "☀️" : "🌕";
+
+  const $contenedorOpciones = $clone.querySelector(".content-opcion");
+  $contenedorOpciones.insertAdjacentElement("afterend", $imgOpcion);
 
   $fragment.appendChild($clone);
   $listContainer.appendChild($fragment);
-}
-
-function diaNoche(horaFormateada, icono) {
-  const hora = obtenerHoraEn24(horaFormateada);
-
-  if (hora >= 6 && hora <= 18) {
-    icono.setAttribute("src", "/img/sol.jpg");
-  } else {
-    icono.setAttribute("src", "/img/luna.jpg");
-  }
 }
 
 function obtenerHoraEn24(horaFormateada) {
@@ -148,18 +139,3 @@ function obtenerHoraEn24(horaFormateada) {
   return horas;
 }
 
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
-
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
-  });
-}
-
-setInterval(() => {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
-}, 5000);
-
-search();
