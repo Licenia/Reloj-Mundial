@@ -91,10 +91,10 @@ export function search() {
 
 function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   const ciudadExistente = document.querySelector(`[data-ciudad="${ciudad}"]`),
-  $listContainer = d.querySelector("#list-container"),  
-  $template = d.getElementById("template-card").content,
-  $fragment = d.createDocumentFragment(),
-  $iconoEliminar = d.createElement("img");
+    $listContainer = d.querySelector("#list-container"),
+    $template = d.getElementById("template-card").content,
+    $fragment = d.createDocumentFragment(),
+    $iconoEliminar = d.createElement("img");
 
   ($iconoEliminar.src = "/img/borrar.png"), ($iconoEliminar.alt = "Opciones");
   $iconoEliminar.classList.add("icono-opciones");
@@ -113,7 +113,7 @@ function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
   $clone.querySelector(".city").textContent = formatearZona(ciudad);
 
   const $icon = $clone.querySelector(".timezone-icon"),
-  hora = obtenerHoraEn24(horaFormateada);
+    hora = obtenerHoraEn24(horaFormateada);
 
   $icon.textContent = hora >= 6 && hora <= 18 ? "☀️" : "🌕";
 
@@ -122,13 +122,27 @@ function mostrarResultados(horaFormateada, ciudad, fechaFormateada) {
 
   $fragment.appendChild($clone);
   $listContainer.appendChild($fragment);
+
+  let zonasGuardadas = JSON.parse(localStorage.getItem("zonasGuardadas")) || [];
+
+  const nuevaZona = {
+    ciudad,
+    horaFormateada,
+    fechaFormateada,
+  };
+
+  const cardExiste = zonasGuardadas.some((z) => z.ciudad === ciudad);
+
+  if (!cardExiste) {
+    zonasGuardadas.push(nuevaZona);
+    localStorage.setItem("zonasGuardadas", JSON.stringify(zonasGuardadas));
+  }
 }
 
-function formatearZona(ciudad){
+function formatearZona(ciudad) {
   const partes = ciudad.split("/"),
-  ciudadLimpia = partes[partes.length -1].replace(/_/g, " ");
+    ciudadLimpia = partes[partes.length - 1].replace(/_/g, " ");
   return ciudadLimpia;
-    
 }
 
 function obtenerHoraEn24(horaFormateada) {
@@ -146,3 +160,20 @@ function obtenerHoraEn24(horaFormateada) {
   return horas;
 }
 
+export function mostrarCardsGuardadas() {
+  const datosGuardados = JSON.parse(
+    localStorage.getItem("zonasGuardadas") || []
+  );
+
+  datosGuardados.forEach((zona) => {
+    mostrarResultados(zona.horaFormateada, zona.ciudad, zona.fechaFormateada);
+  });
+}
+
+export function eliminarZona(ciudad) {
+  let zonasGuardadas = JSON.parse(
+    localStorage.getItem("zonasGuardadas") || "[]"
+  );
+  zonasGuardadas = zonasGuardadas.filter((z) => z.ciudad !== ciudad);
+  localStorage.setItem("zonasGuardadas", JSON.stringify(zonasGuardadas));
+}

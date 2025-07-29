@@ -1,19 +1,28 @@
-import {manejarBusqueda, search} from "./funciones_reloj"
+import {
+  manejarBusqueda,
+  search,
+  mostrarCardsGuardadas,
+  eliminarZona,
+} from "./funciones_reloj";
 
 const d = document,
-$id = d.getElementById("agregarZonaHoraria")
+  $id = d.getElementById("agregarZonaHoraria");
 
-d.addEventListener("DOMContentLoaded" , () =>{
-    if ($id) {
-        $id.addEventListener("click", manejarBusqueda)        
-    }
+d.addEventListener("DOMContentLoaded", () => {
+  if ($id) {
+    $id.addEventListener("click", manejarBusqueda);
+  }
+  search();
+  mostrarCardsGuardadas();
+});
 
-    search()
-})
+d.addEventListener("click", (e) => {
+  if (e.target.matches(".icono-opciones")) {
+    const $card = e.target.closest(".container-result");
+    const ciudad = $card.dataset.ciudad;
 
-d.addEventListener("click", (e) =>{
-     if (e.target.matches(".icono-opciones")) {
-        const $card = e.target.closest(".container-result");
-        $card.remove();
-    }
-})
+    $card.remove();
+
+    eliminarZona(ciudad);
+  }
+});
