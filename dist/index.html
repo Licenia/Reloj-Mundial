@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Reloj Mundial</title>
+    <script type="module" crossorigin src="/assets/index-DZ55E1-C.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DyKpvEgn.css">
+  </head>
+  <body>
+    <section class="clock-section">
+        <div>
+          <div class="clock-list">
+            <select id="zona-select" >
+              <option value="">Seleccione una zona horaria</option>
+            </select>
+            <button id="agregarZonaHoraria">Agregar</button>
+            <div class="message"></div>
+            <ul id="list-container">
+            </ul>
+            </div>
+    </section>
+
+    <template id="template-card">
+      <li class="container-result" data-ciudad="">
+          <div class="timezone-icon"></div>
+          <div class="info">
+            <span class="city"></span>
+            <span class="hour"></span>
+          </div>
+          <div class="content-opcion">
+            <span class="date"></span>
+          </div>
+      </li>
+    </template>
+  </body>
+</html>
