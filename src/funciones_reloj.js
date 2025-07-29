@@ -29,36 +29,59 @@ function addCountry() {
 
 setInterval(() => {
   ciudadesAgregadas.forEach((ciudad) => {
-    obtenerFechayHora(ciudad);
+    actualizarHora(ciudad);
   });
 }, 60000);
 
+const horasLocales = {};
+
 async function obtenerFechayHora(ciudad) {
+ mostrarSkeleton(ciudad); 
+
   const url = `https://timeapi.io/api/TimeZone/zone?timeZone=${ciudad}`;
 
-  await fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      const dateObj = new Date(data.currentLocalTime);
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const dateObj = new Date(data.currentLocalTime);
 
-      const hora = {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      };
+    horasLocales[ciudad] = dateObj;
 
-      const fecha = {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-      };
+    const skeleton = document.querySelector(`.card-skeleton[data-ciudad="${ciudad}"]`);
+    if (skeleton) skeleton.remove();
 
-      horaFormateada = dateObj.toLocaleTimeString("es-Ec", hora);
-      fechaFormateada = dateObj.toLocaleDateString("es-Ec", fecha);
+    actualizarHora(ciudad);
+  } catch (err) {
+    console.error(err);
+     message.innerHTML = "<p>Error al cargar la hora. Intenta de nuevo.</p>";
+  }
+}
 
-      mostrarResultados(horaFormateada, ciudad, fechaFormateada);
-    })
-    .catch((err) => console.error(err));
+
+function actualizarHora(ciudad) {
+  const base = horasLocales[ciudad];
+  if (!base) return;
+
+  const now = new Date();
+  const diferencia = now - base;
+  const horaActual = new Date(base.getTime() + diferencia);
+
+  const hora = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
+
+  const fecha = {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  };
+
+  const horaFormateada = horaActual.toLocaleTimeString("es-Ec", hora);
+  const fechaFormateada = horaActual.toLocaleDateString("es-Ec", fecha);
+
+  mostrarResultados(horaFormateada, ciudad, fechaFormateada);
 }
 
 export function search() {
@@ -176,4 +199,20 @@ export function eliminarZona(ciudad) {
   );
   zonasGuardadas = zonasGuardadas.filter((z) => z.ciudad !== ciudad);
   localStorage.setItem("zonasGuardadas", JSON.stringify(zonasGuardadas));
+}
+
+function mostrarSkeleton(ciudad) {
+  const $listContainer = document.getElementById("list-container");
+  const $skeleton = document.createElement("div");
+  $skeleton.classList.add("card-skeleton", "skeleton");
+  $skeleton.setAttribute("data-ciudad", ciudad); 
+
+
+  $skeleton.innerHTML = `
+    <div class="skeleton skeleton-line skeleton-title"></div>
+    <div class="skeleton skeleton-line"></div>
+    <div class="skeleton skeleton-line"></div>
+  `;
+
+  $listContainer.appendChild($skeleton);
 }
