@@ -27,44 +27,43 @@ function addCountry() {
   return ciudad;
 }
 
-setInterval(() => {
-  ciudadesAgregadas.forEach((ciudad) => {
-    actualizarHora(ciudad);
-  });
-}, 60000);
-
 const horasLocales = {};
 
 async function obtenerFechayHora(ciudad) {
- mostrarSkeleton(ciudad); 
+  mostrarSkeleton(ciudad);
 
   const url = `https://timeapi.io/api/TimeZone/zone?timeZone=${ciudad}`;
 
   try {
     const res = await fetch(url);
     const data = await res.json();
-    const dateObj = new Date(data.currentLocalTime);
 
-    horasLocales[ciudad] = dateObj;
+    horasLocales[ciudad] = {
+      horaBase: new Date(data.currentLocalTime),
+      timestampLocal: new Date(),
+    };
 
-    const skeleton = document.querySelector(`.card-skeleton[data-ciudad="${ciudad}"]`);
+    const skeleton = document.querySelector(
+      `.card-skeleton[data-ciudad="${ciudad}"]`
+    );
     if (skeleton) skeleton.remove();
 
     actualizarHora(ciudad);
   } catch (err) {
     console.error(err);
-     message.innerHTML = "<p>Error al cargar la hora. Intenta de nuevo.</p>";
+    if (message) {
+      message.innerHTML = "<p>Error al cargar la hora. Intenta de nuevo.</p>";
+    }
   }
 }
-
 
 function actualizarHora(ciudad) {
   const base = horasLocales[ciudad];
   if (!base) return;
 
   const now = new Date();
-  const diferencia = now - base;
-  const horaActual = new Date(base.getTime() + diferencia);
+  const diferencia = now - base.timestampLocal;
+  const horaActual = new Date(base.horaBase.getTime() + diferencia);
 
   const hora = {
     hour: "2-digit",
@@ -205,8 +204,7 @@ function mostrarSkeleton(ciudad) {
   const $listContainer = document.getElementById("list-container");
   const $skeleton = document.createElement("div");
   $skeleton.classList.add("card-skeleton", "skeleton");
-  $skeleton.setAttribute("data-ciudad", ciudad); 
-
+  $skeleton.setAttribute("data-ciudad", ciudad);
 
   $skeleton.innerHTML = `
     <div class="skeleton skeleton-line skeleton-title"></div>
@@ -216,3 +214,30 @@ function mostrarSkeleton(ciudad) {
 
   $listContainer.appendChild($skeleton);
 }
+
+setInterval(() => {
+  for (const ciudad in horasLocales) {
+    const base = horasLocales[ciudad];
+    const ahora = new Date();
+    const diferencia = ahora - base.timestampLocal;
+    const horaActual = new Date(base.horaBase.getTime() + diferencia);
+
+    const $hora = document.querySelector(`[data-ciudad="${ciudad}"] .hour`),
+      $fecha = document.querySelector(`[data-ciudad="${ciudad}"] .date`);
+
+    if ($hora) {
+      $hora.textContent = horaActual.toLocaleTimeString("es-EC", {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+
+    if ($fecha) {
+      $fecha.textContent = horaActual.toLocaleDateString("es-EC", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    }
+  }
+}, 60_000); 
