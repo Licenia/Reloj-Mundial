@@ -24,11 +24,11 @@ Comprender el funcionamiento de las APIs y aplicar estos conocimientos en un pro
 - **Selector de Zonas Horarias:** lista desplegable con todas las zonas horarias proporcionadas por **TimeApi.**
 - **Boton:**   activa las funciones principales, incluyendo validaciones y peticiones a la API.
 - **Cards dinamicas:** muestran: 
--Icono de dia/noche
--Hora 
--Fecha
--Zona horaria 
--Boton para eliminar la card.
+- Icono de dia/noche
+- Hora 
+- Fecha
+- Zona horaria 
+- Boton para eliminar la card.
 - **Actualización automática de hora y fecha**
 - **Almacenamiento local:** guarda las consultas realizadas.
 - **Diseño responsive:** se adapta a moviles, tabletas y pantallas grandes.
