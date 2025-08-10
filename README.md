@@ -21,7 +21,6 @@ Comprender el funcionamiento de las APIs y aplicar estos conocimientos en un pro
 
 ## Componentes y Funcionalidades
 
-- **Slice var:** contiene dos imagenes inspiradas en Soul Eater que se alternan  mediante una función en JavaScript.
 - **Selector de Zonas Horarias:** lista desplegable con todas las zonas horarias proporcionadas por **TimeApi.**
 - **Boton:**   activa las funciones principales, incluyendo validaciones y peticiones a la API.
 - **Cards dinamicas:** muestran: 
@@ -30,15 +29,15 @@ Comprender el funcionamiento de las APIs y aplicar estos conocimientos en un pro
 -Fecha
 -Zona horaria 
 -Boton para eliminar la card.
--**Actualización automática de hora y fecha**
--**Almacenamiento local:** guarda las consultas realizadas.
--**Diseño responsive:** se adapta a moviles, tabletas y pantallas grandes.
--**Nueva imagen de fondo mas acorde al contenido**
---**Skeleton loader:** al consultar una nueva zona, se muestra un loader mientras se espera la respuesta de la API.
+- **Actualización automática de hora y fecha**
+- **Almacenamiento local:** guarda las consultas realizadas.
+- **Diseño responsive:** se adapta a moviles, tabletas y pantallas grandes.
+- **Nueva imagen de fondo mas acorde al contenido**
+- **Skeleton loader:** al consultar una nueva zona, se muestra un loader mientras se espera la respuesta de la API.
 
 ## Enlace en linea
 puedes probar el proyecto aqui:
-https://relojs.netlify.app/
+[🌐 Reloj Mundial en Netlify](https://relojs.netlify.app/)
 
 ## Gif
 ![Reloj Mundial en acción](/public/img/demo.gif)
