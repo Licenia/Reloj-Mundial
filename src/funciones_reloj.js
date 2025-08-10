@@ -206,10 +206,19 @@ function mostrarSkeleton(ciudad) {
   $skeleton.classList.add("card-skeleton", "skeleton");
   $skeleton.setAttribute("data-ciudad", ciudad);
 
+ 
   $skeleton.innerHTML = `
-    <div class="skeleton skeleton-line skeleton-title"></div>
-    <div class="skeleton skeleton-line"></div>
-    <div class="skeleton skeleton-line"></div>
+    <div class="skeleton-header">
+      <div class="skeleton skeleton-title"></div>
+      <div class="skeleton skeleton-icon"></div>
+    </div>
+    <div class="skeleton skeleton-description"></div>
+    <div class="skeleton-cards">
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+      <div class="skeleton skeleton-line"></div>
+    </div>
   `;
 
   $listContainer.appendChild($skeleton);
